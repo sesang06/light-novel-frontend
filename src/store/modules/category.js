@@ -25,7 +25,6 @@ export default handleActions({
     }),
     ...pender({
         type: INSERT_CATEGORY
-
     }),
     ...pender({
         type: DELETE_CATEGORY

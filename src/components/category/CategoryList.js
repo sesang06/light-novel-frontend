@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import CategoryItem from './CategoryItem';
 import { List } from 'immutable';
-import { category } from '../../store/modules';
 
 
 class CategoryList extends Component {
