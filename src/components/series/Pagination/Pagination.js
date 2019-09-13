@@ -1,37 +1,58 @@
 import React from 'react';
 import { Range } from 'immutable';
 import { Link } from 'react-router-dom';
+import { Button, withStyles, Grid } from '@material-ui/core';
 
-const PageButton = ({ page }) => {
+const styles = theme => ({
+    root: {
+        flexGrow: 1,
+    },
+    paper: {
+        height: 140,
+        width: 100,
+    },
+    control: {
+        padding: theme.spacing(2),
+    },
+});
+
+const PageButton = ({ page, limit }) => {
     return (
-        <div>
-            <Link to={`series?page=${page}`}>{page}</Link>
-        </div>
+        <Grid item>
+            <Link to={`series?page=${page}&limit=${limit}`}>{page}</Link>
+        </Grid>
+
+
     )
 }
 
-const Pagination = ({ page, lastPage }) => {
+const Pagination = ({ page, lastPage, classes, limit }) => {
 
     const startCurrentPage = Math.max(Math.ceil(page / 10 - 1) * 10, 1);
     const lastCurrentPage = Math.min(Math.ceil(page / 10) * 10 + 1, lastPage);
     const range = Range(startCurrentPage, lastCurrentPage + 1);
     return (
-        <div>
+
+        <div className={classes.root} >
             <div>
-                <p>현재 {page} 페이지</p>
-                <p>전체 {lastPage} 페이지
-                {startCurrentPage} {lastCurrentPage}</p>
+                <p>현재 {page} 페이지, 전체 {lastPage} 페이지</p>
             </div>
-            <div>
+            <Grid container spacing={3}>
+
                 {
                     range.map(value => (
-                        <PageButton key={value} page={value} />
+                        <PageButton
+                            key={value}
+                            page={value}
+                            limit={limit} />
                     ))
                 }
 
-            </div>
+
+            </Grid>
         </div>
+
     )
 
 }
-export default Pagination; 
+export default withStyles(styles)(Pagination); 

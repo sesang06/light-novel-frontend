@@ -1,6 +1,27 @@
 import React, { Component } from 'react';
 import SeriesCategoryList from './SeriesCategoryList';
 import { Map } from 'immutable';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
+import { withStyles } from '@material-ui/styles';
+import { Typography } from '@material-ui/core';
+
+const styles = theme => ({
+    card: {
+      width: 300
+     },
+    bullet: {
+      display: 'inline-block',
+      margin: '0 2px',
+      transform: 'scale(0.8)',
+    },
+    title: {
+      fontSize: 14,
+    },
+    pos: {
+      marginBottom: 12,
+    },
+  });
 
 class SeriesItem extends Component {
 
@@ -11,7 +32,7 @@ class SeriesItem extends Component {
             deleteCategories: Map()
         }
     }
-    
+
     onAdd = ({ title, id }) => {
         if (this.state.deleteCategories.has(id)) {
             this.setState({
@@ -52,14 +73,20 @@ class SeriesItem extends Component {
     }
 
     render() {
+
+    const { classes } = this.props;
         const { series, categories } = this.props;
         return (
-            <div>
-                <div>
+            <Card className={classes.card}>
+                 <CardContent>
+                 <div>
                     <p>{series.get('id')}</p>
                 </div>
                 <div>
                     <p>{series.get('title')}</p>
+                </div>
+                <div>
+                    <Typography>{series.get('description')}</Typography>
                 </div>
                 <div>
                     <img src={series.get('thumbnail')} />
@@ -72,9 +99,11 @@ class SeriesItem extends Component {
                         onDelete={this.onDelete}
                     />
                 </div>
-            </div>
+                 </CardContent>
+                
+            </Card>
         )
     }
 }
 
-export default SeriesItem;
+export default withStyles(styles)(SeriesItem);

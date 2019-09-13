@@ -20,11 +20,11 @@ class Series extends Component {
 
 
     initialize = async () => {
-        const { SeriesActions, GetCategoryActions, page } = this.props;
+        const { SeriesActions, GetCategoryActions, page, limit } = this.props;
 
         try {
             const offset = (page - 1) * 10;
-            await SeriesActions.getSeriesList({ offset });
+            await SeriesActions.getSeriesList({ offset, limit });
             await GetCategoryActions.getCategory();
         } catch (e) {
             console.log(e);
@@ -97,7 +97,7 @@ class Series extends Component {
 
 
     render() {
-        const { seriesList, lastPage, page, categories } = this.props;
+        const { seriesList, lastPage, page, limit, categories } = this.props;
         return (
             <div>
                 <form onSubmit={this.onSubmit}>
@@ -113,6 +113,7 @@ class Series extends Component {
                 <Pagination
                     lastPage={lastPage}
                     page={page}
+                    limit={limit}
                 />
             </div>
         )

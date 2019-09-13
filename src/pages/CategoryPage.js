@@ -1,12 +1,13 @@
 import React from 'react';
 import Category from '../containers/category/Category';
+import PageTemplate from '../components/common/PageTemplate/PageTemplate';
 
 const CategoryPage = () => {
     return (
-        <div>
+        <PageTemplate>
             카테고리
             <Category/>
-        </div>
+        </PageTemplate>
     )
 }
 export default CategoryPage;
