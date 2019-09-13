@@ -4,13 +4,15 @@ import { List } from 'immutable';
 
 class SeriesList extends Component {
     render() {
-        const { seriesList } = this.props;
+        const { seriesList, categories, onCategoryChange } = this.props;
         return (
             <div>
                 {seriesList.map(series => (
                     <SeriesItem
                         key={series.get('id')}
                         series={series}
+                        categories={categories}
+                        onCategoryChange={onCategoryChange}
                     />
                 ))}
             </div>

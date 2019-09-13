@@ -11,3 +11,5 @@ export const getSeriesList = ({offset}) => {
     });
     return axios.get(`/api/light_novel_series?${query}`)
 };
+export const addSeriesCategories = ({id, titles}) => axios.post(`/api/light_novel_series/${id}/category/adds`, {titles});
+export const deleteSeriesCategories = ({id, titles}) => axios.post(`/api/light_novel_series/${id}/category/deletes`, {titles});
